@@ -2,4 +2,5 @@ rootProject.name = 'gh-s12-hw-taras-ostrenskyi'
 include 'hw1'
 include 'hw2'
 include 'hw3'
+include 'hw4'
 
