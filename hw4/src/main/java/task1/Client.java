@@ -10,5 +10,5 @@ abstract class Client {
 
     public abstract int printIdByName();
 
-    public abstract void printInfoAllclients();
+    public abstract void printInfoClients();
 }
