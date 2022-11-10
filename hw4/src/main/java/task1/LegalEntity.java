@@ -2,6 +2,7 @@ package task1;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class LegalEntity extends Client {
     private String ownerSurname;
@@ -21,7 +22,7 @@ public class LegalEntity extends Client {
         idLegalEntityName.put(id, name);
     }
 
-    @Override
+    /*@Override
     public String printNameById() {
         return idLegalEntityName.get(id);
     }
@@ -36,5 +37,13 @@ public class LegalEntity extends Client {
         for (Integer keys : idLegalEntityName.keySet()) {
             System.out.println("id" + keys + " - " + idLegalEntityName.get(keys));
         }
+    }*/
+    public Set<Integer> keySet(){
+        return idLegalEntityName.keySet();
     }
+
+    public String get(Integer key){
+        return idLegalEntityName.get(key);
+    }
+
 }

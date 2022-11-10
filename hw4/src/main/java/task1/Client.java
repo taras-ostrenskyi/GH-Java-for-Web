@@ -6,9 +6,4 @@ abstract class Client {
 
     public abstract void addClient(Integer id, String name);
 
-    public abstract String printNameById();
-
-    public abstract int printIdByName();
-
-    public abstract void printInfoClients();
 }
