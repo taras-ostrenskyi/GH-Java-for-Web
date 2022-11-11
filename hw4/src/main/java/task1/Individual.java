@@ -17,21 +17,6 @@ public class Individual extends Client {
         idIndividualName.put(id, name);
     }
 
-    /*public String printNameById() {
-        return idIndividualName.get(id);
-    }
-
-    public int printIdByName() {
-        return Integer.parseInt(idIndividualName.get(name));
-    }
-
-
-    public void printInfoClients() {
-        for (Integer keys : idIndividualName.keySet()) {
-            System.out.println("id" + keys + " - " + idIndividualName.get(keys));
-        }
-    }*/
-
     public Set<Integer> keySet(){
         return idIndividualName.keySet();
     }

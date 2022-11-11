@@ -1,8 +1,5 @@
 package task1;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Bank {
     public static void main(String[] args) {
 
@@ -14,7 +11,7 @@ public class Bank {
         individual.addClient(124582346, "Volodymyr");
 
         System.out.println("The bank's clients - individuals:");
-        Information infoIndivid = new Information(individual);
+        InfoPrinter infoIndivid = new InfoPrinter(individual);
         infoIndivid.printInfoIndividual();
         System.out.println();
 
@@ -26,7 +23,7 @@ public class Bank {
         legalEntity.addClient(69413254,"UPG Cherkasy");
 
         System.out.println("The bank's clients - legal entities:");
-        Information infoEntity = new Information(legalEntity);
+        InfoPrinter infoEntity = new InfoPrinter(legalEntity);
         infoEntity.printInfoLegalEntity();
         System.out.println();
 
@@ -37,7 +34,7 @@ public class Bank {
         deposit.addAsset(74856472,500000);
 
         System.out.println("The bank's clients - UAH deposits:");
-        Information infoDeposit = new Information(deposit);
+        InfoPrinter infoDeposit = new InfoPrinter(deposit);
         infoDeposit.printInfoDeposit();
         System.out.println();
 
@@ -48,7 +45,7 @@ public class Bank {
         currentDollarAccount.addAsset(124582346, 2000);
 
         System.out.println("The bank's clients - current dollars accounts:");
-        Information infoCurrentDollarAccount = new Information(currentDollarAccount);
+        InfoPrinter infoCurrentDollarAccount = new InfoPrinter(currentDollarAccount);
         infoCurrentDollarAccount.printInfoCurrentDollarAccount();
         System.out.println();
 
@@ -59,11 +56,13 @@ public class Bank {
         preciousMetal.addMetal(69413254, 1.1);
 
         System.out.println("The bank's clients - gold in storage, kg:");
-        Information infoPreciousMetal = new Information(preciousMetal);
+        InfoPrinter infoPreciousMetal = new InfoPrinter(preciousMetal);
         infoPreciousMetal.printInfoPreciousMetal();
         System.out.println();
 
-        System.out.println("The value of the bank's assets in US dollars:");
+        System.out.println("In US dollars the value of all bank's assets:");
+        InfoPrinter infoWhole = new InfoPrinter(deposit, currentDollarAccount, preciousMetal);
+        infoWhole.printWholePriceAssets();
 
     }
 }

@@ -15,6 +15,15 @@ public class CurrentDollarAccount extends Asset {
         idDollarSum.put(clientId, moneyAmount);
     }
 
+    @Override
+    public double calculateWholePriceUsd() {
+        double wholePriceUsd = 0.0;
+        for (Integer keys : idDollarSum.keySet()){
+            wholePriceUsd += idDollarSum.get(keys);
+        }
+        return wholePriceUsd;
+    }
+
     public Set<Integer> keySet(){
         return idDollarSum.keySet();
     }

@@ -10,12 +10,22 @@ public class Deposit extends Asset {
     LocalDate startDate;
     int moneyAmount;
     int yearPercent;
+    double uahUsdExchangeRate = 40.5;
 
     Map<Integer, Integer> idDepositSum = new HashMap<>();
 
     @Override
     public void addAsset(Integer clientId, Integer moneyAmount) {
         idDepositSum.put(clientId, moneyAmount);
+    }
+
+    @Override
+    public double calculateWholePriceUsd() {
+        double wholePriceUsd = 0.0;
+        for (Integer keys : idDepositSum.keySet()){
+            wholePriceUsd += idDepositSum.get(keys) / uahUsdExchangeRate;
+        }
+        return wholePriceUsd;
     }
 
     public Set<Integer> keySet(){

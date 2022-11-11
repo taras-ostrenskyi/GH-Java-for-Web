@@ -8,7 +8,7 @@ public class PreciousMetal extends Asset{
 
     String typeOfmetal = "Gold";
     Double massInKg;
-    Double priceKgGold = 2000000.0;
+    Double priceUsdKgGold = 49382.72;
 
     Map<Integer, Double> idMetalKg = new HashMap<>();
 
@@ -19,6 +19,15 @@ public class PreciousMetal extends Asset{
     @Override
     public void addAsset(Integer clientId, Integer moneyAmount) {
 
+    }
+
+    @Override
+    public double calculateWholePriceUsd() {
+        double wholePriceUsd = 0.0;
+        for (Integer keys : idMetalKg.keySet()){
+            wholePriceUsd += idMetalKg.get(keys) * priceUsdKgGold;
+        }
+        return wholePriceUsd;
     }
 
     public Set<Integer> keySet(){
