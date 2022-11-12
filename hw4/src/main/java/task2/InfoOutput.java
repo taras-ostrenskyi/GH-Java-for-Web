@@ -9,6 +9,7 @@ public class InfoOutput {
     }
 
     public void printWords() {
+        System.out.println("Short words:");
         for (int i = 0; i < brain.shortWords.size(); i++){
             System.out.println(brain.get(i));
         }

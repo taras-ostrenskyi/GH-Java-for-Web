@@ -13,7 +13,7 @@ public class Bank {
         individual.addClient(124582346, "Volodymyr");
 
         System.out.println("The bank's clients - individuals:");
-        InfoPrinter infoIndivid = new InfoPrinter(individual);
+        InfoOutput infoIndivid = new InfoOutput(individual);
         infoIndivid.printInfoIndividual();
         System.out.println();
 
@@ -25,7 +25,7 @@ public class Bank {
         legalEntity.addClient(69413254,"UPG Cherkasy");
 
         System.out.println("The bank's clients - legal entities:");
-        InfoPrinter infoEntity = new InfoPrinter(legalEntity);
+        InfoOutput infoEntity = new InfoOutput(legalEntity);
         infoEntity.printInfoLegalEntity();
         System.out.println();
 
@@ -36,7 +36,7 @@ public class Bank {
         deposit.addAsset(74856472,500000);
 
         System.out.println("The bank's clients - UAH deposits:");
-        InfoPrinter infoDeposit = new InfoPrinter(deposit);
+        InfoOutput infoDeposit = new InfoOutput(deposit);
         infoDeposit.printInfoDeposit();
         System.out.println();
 
@@ -47,7 +47,7 @@ public class Bank {
         currentDollarAccount.addAsset(124582346, 2000);
 
         System.out.println("The bank's clients - current US dollars accounts:");
-        InfoPrinter infoCurrentDollarAccount = new InfoPrinter(currentDollarAccount);
+        InfoOutput infoCurrentDollarAccount = new InfoOutput(currentDollarAccount);
         infoCurrentDollarAccount.printInfoCurrentDollarAccount();
         System.out.println();
 
@@ -58,12 +58,12 @@ public class Bank {
         preciousMetal.addMetal(69413254, 1.1);
 
         System.out.println("The bank's clients - gold in storage, kg:");
-        InfoPrinter infoPreciousMetal = new InfoPrinter(preciousMetal);
+        InfoOutput infoPreciousMetal = new InfoOutput(preciousMetal);
         infoPreciousMetal.printInfoPreciousMetal();
         System.out.println();
 
         System.out.println("In US dollars the value of all bank's assets of all bank's clients:");
-        InfoPrinter infoWhole = new InfoPrinter(deposit, currentDollarAccount, preciousMetal);
+        InfoOutput infoWhole = new InfoOutput(deposit, currentDollarAccount, preciousMetal);
         infoWhole.printWholePriceAssets();
         System.out.println();
 
@@ -72,13 +72,14 @@ public class Bank {
         int clientId = Integer.parseInt(scan.nextLine());
 
         System.out.println("UAH deposits:");
-        InfoPrinter infoDepositFind = new InfoPrinter(deposit, clientId);
+        InfoOutput infoDepositFind = new InfoOutput(deposit, clientId);
         infoDepositFind.printInfoDepositFind();
-
         System.out.println("US dollars accounts:");
-
+        InfoOutput infoDollarAccountFind = new InfoOutput(currentDollarAccount, clientId);
+        infoDollarAccountFind.printInfoDollarAccountFind();
         System.out.println("Gold in storage, kg:");
-
+        InfoOutput infoPreciousMetalFind = new InfoOutput(preciousMetal, clientId);
+        infoPreciousMetalFind.printInfoPreciousMetalFind();
 
     }
 }

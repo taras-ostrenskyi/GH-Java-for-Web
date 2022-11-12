@@ -14,7 +14,6 @@ public class Abbreviation {
         }
 
         InfoOutput infoOutput = new InfoOutput(brain);
-        System.out.println("Short words:");
         infoOutput.printWords();
 
     }

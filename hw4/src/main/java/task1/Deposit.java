@@ -19,10 +19,6 @@ public class Deposit extends Asset {
         this.yearPercent = yearPercent;
     }
 
-    public Deposit(int clientId){
-        this.clientId = clientId;
-    }
-
     public Deposit(){
 
     }

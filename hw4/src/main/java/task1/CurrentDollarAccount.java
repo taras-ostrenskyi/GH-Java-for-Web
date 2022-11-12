@@ -40,4 +40,12 @@ public class CurrentDollarAccount extends Asset {
     public Integer get(Integer key){
         return idDollarSum.get(key);
     }
+
+    public int getMoneyAmount() {
+        return moneyAmount;
+    }
+
+    public void setMoneyAmount(int moneyAmount) {
+        this.moneyAmount = moneyAmount;
+    }
 }

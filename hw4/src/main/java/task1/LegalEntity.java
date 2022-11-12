@@ -32,4 +32,7 @@ public class LegalEntity extends Client {
         return idLegalEntityName.get(key);
     }
 
+    public String getOwnerSurname() {
+        return ownerSurname;
+    }
 }
