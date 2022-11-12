@@ -6,6 +6,11 @@ import java.util.Set;
 
 public class Individual extends Client {
 
+    public Individual(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
     public Individual(){
 
     }

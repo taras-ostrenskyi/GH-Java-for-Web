@@ -13,8 +13,9 @@ public class Abbreviation {
             brain.shortenWord(scan.nextLine());
         }
 
+        InfoOutput infoOutput = new InfoOutput(brain);
         System.out.println("Short words:");
-        brain.printShortWords();
+        infoOutput.printWords();
 
     }
 }

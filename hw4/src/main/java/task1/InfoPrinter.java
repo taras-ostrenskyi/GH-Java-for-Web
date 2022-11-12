@@ -1,6 +1,8 @@
 package task1;
 
 public class InfoPrinter {
+
+    private int clientId;
     private Individual individual;
     private LegalEntity legalEntity;
     private Deposit deposit;
@@ -17,6 +19,11 @@ public class InfoPrinter {
 
     public InfoPrinter(Deposit deposit){
         this.deposit = deposit;
+    }
+
+    public InfoPrinter(Deposit deposit, int clientId){
+        this.deposit = deposit;
+        this.clientId = clientId;
     }
 
     public InfoPrinter(CurrentDollarAccount currentDollarAccount) {
@@ -67,6 +74,10 @@ public class InfoPrinter {
     public void printWholePriceAssets(){
         System.out.println(deposit.calculateWholePriceUsd() + currentDollarAccount.calculateWholePriceUsd()
                 + preciousMetal.calculateWholePriceUsd());
+    }
+
+    public void printInfoDepositFind() {
+            System.out.println("id" + clientId + " - " + deposit.get(clientId));
     }
 
 }

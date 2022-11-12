@@ -6,9 +6,18 @@ import java.util.Set;
 
 public class PreciousMetal extends Asset{
 
-    String typeOfmetal = "Gold";
+    private final String typeOfmetal = "Gold";
     Double massInKg;
     Double priceUsdKgGold = 49382.72;
+
+    public PreciousMetal(int clientId, Double massInKg){
+        this.clientId = clientId;
+        this.massInKg = massInKg;
+    }
+
+    public PreciousMetal(){
+
+    }
 
     Map<Integer, Double> idMetalKg = new HashMap<>();
 

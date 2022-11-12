@@ -7,7 +7,9 @@ import java.util.Set;
 public class LegalEntity extends Client {
     private String ownerSurname;
 
-    public LegalEntity(String ownerSurname) {
+    public LegalEntity(int id, String name, String ownerSurname) {
+        this.id = id;
+        this.name = name;
         this.ownerSurname = ownerSurname;
     }
 
@@ -22,22 +24,6 @@ public class LegalEntity extends Client {
         idLegalEntityName.put(id, name);
     }
 
-    /*@Override
-    public String printNameById() {
-        return idLegalEntityName.get(id);
-    }
-
-    @Override
-    public int printIdByName() {
-        return Integer.parseInt(idLegalEntityName.get(name));
-    }
-
-    @Override
-    public void printInfoClients() {
-        for (Integer keys : idLegalEntityName.keySet()) {
-            System.out.println("id" + keys + " - " + idLegalEntityName.get(keys));
-        }
-    }*/
     public Set<Integer> keySet(){
         return idLegalEntityName.keySet();
     }

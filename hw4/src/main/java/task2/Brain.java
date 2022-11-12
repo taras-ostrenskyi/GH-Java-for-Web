@@ -9,10 +9,10 @@ public class Brain {
 
     }
 
-    List<String> shortWords = new ArrayList<String>();
+    List<String> shortWords = new ArrayList<>();
 
     public void shortenWord(String word){
-        String shortWord = "";
+        String shortWord;
         if (word.length() > 10){
             String middleShortWord = Integer.toString(word.length() - 2);
             shortWord = word.charAt(0) + middleShortWord + word.charAt(word.length() - 1);
@@ -23,9 +23,8 @@ public class Brain {
         shortWords.add(shortWord);
     }
 
-    public void printShortWords(){
-        for (int i = 0; i < shortWords.size(); i++){
-            System.out.println(shortWords.get(i));
-        }
+    public String get(Integer i){
+        return shortWords.get(i);
     }
+
 }

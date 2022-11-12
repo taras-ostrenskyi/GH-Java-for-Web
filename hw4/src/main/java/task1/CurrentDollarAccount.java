@@ -6,7 +6,16 @@ import java.util.Set;
 
 public class CurrentDollarAccount extends Asset {
 
-    int moneyAmount;
+    private int moneyAmount;
+
+    public CurrentDollarAccount(int clientId, int moneyAmount){
+        this.moneyAmount = moneyAmount;
+        this.clientId = clientId;
+    }
+
+    public CurrentDollarAccount(){
+
+    }
 
     Map<Integer, Integer> idDollarSum = new HashMap<>();
 

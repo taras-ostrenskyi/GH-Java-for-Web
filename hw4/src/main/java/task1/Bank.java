@@ -1,5 +1,7 @@
 package task1;
 
+import java.util.Scanner;
+
 public class Bank {
     public static void main(String[] args) {
 
@@ -44,7 +46,7 @@ public class Bank {
         currentDollarAccount.addAsset(51987325,1500);
         currentDollarAccount.addAsset(124582346, 2000);
 
-        System.out.println("The bank's clients - current dollars accounts:");
+        System.out.println("The bank's clients - current US dollars accounts:");
         InfoPrinter infoCurrentDollarAccount = new InfoPrinter(currentDollarAccount);
         infoCurrentDollarAccount.printInfoCurrentDollarAccount();
         System.out.println();
@@ -60,9 +62,23 @@ public class Bank {
         infoPreciousMetal.printInfoPreciousMetal();
         System.out.println();
 
-        System.out.println("In US dollars the value of all bank's assets:");
+        System.out.println("In US dollars the value of all bank's assets of all bank's clients:");
         InfoPrinter infoWhole = new InfoPrinter(deposit, currentDollarAccount, preciousMetal);
         infoWhole.printWholePriceAssets();
+        System.out.println();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter client id whose assets need to be shown:");
+        int clientId = Integer.parseInt(scan.nextLine());
+
+        System.out.println("UAH deposits:");
+        InfoPrinter infoDepositFind = new InfoPrinter(deposit, clientId);
+        infoDepositFind.printInfoDepositFind();
+
+        System.out.println("US dollars accounts:");
+
+        System.out.println("Gold in storage, kg:");
+
 
     }
 }
