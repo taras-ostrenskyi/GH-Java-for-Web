@@ -16,6 +16,8 @@ public class App {
     public static void main(String[] args) {
         final App app = new App();
 
+        out.println("--- Railway Station ---");
+
         station.add(app.createTrain1());
         station.add(app.createTrain2());
         station.add(app.createTrain3());

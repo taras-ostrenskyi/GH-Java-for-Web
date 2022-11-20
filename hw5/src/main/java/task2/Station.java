@@ -42,20 +42,24 @@ public class Station {
             case DOWNLOAD:
                 int wagonNumber = 1;
                 for (CargoWagon<Carriage> wagon : wagons) {
-                    System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.unitNumber + " " + wagon.entry.unit);
+                    if (wagon.entry.unitNumber == 0){
+                        System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " ↓");
+                    }
+                    else{
+                        System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.name + wagon.entry.unitNumber + " " + wagon.entry.unit + " ↓");
+                    }
                     wagonNumber++;
                 }
-
-
-
-                System.out.println("Added");
                 break;
             case UNLOAD:
-                System.out.println("Added");
+                int wagonNum = 1;
+                for (CargoWagon<Carriage> wagon : wagons) {
+                    System.out.print("/" + wagonNum + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.name + wagon.entry.unitNumber + " " + wagon.entry.unit + " ↑");
+                    wagonNum++;
+                }
                 break;
             default:
 
         }
-
     }
 }

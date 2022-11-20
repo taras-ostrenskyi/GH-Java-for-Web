@@ -39,6 +39,53 @@ public class LinkedList<T extends Number> {
 
         System.out.println("List after remove: ");
         list.printlist(list.head);
+
+
+        int[] array = new int[12];
+
+        for (int i = 0; i < array.length; i++){
+            array[i] = list.head.data;
+            list.head = list.head.next;
+        }
+
+        for (int i = 0; i < array.length - 1; i++){
+            for (int j = 0; j < array.length - i - 1; j++){
+                if (array[j + 1] < array[j]){
+                    int temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+
+        LinkedList<Integer> listFromMinToMax = new LinkedList<>();
+
+        for (int j : array) {
+            listFromMinToMax.insertAtTheEnd(j);
+        }
+
+        System.out.println("List after bubble sort from min to max: ");
+        list.printlist(listFromMinToMax.head);
+
+        for (int i = 0; i < array.length - 1; i++){
+            for (int j = 0; j < array.length - i - 1; j++){
+                if (array[j + 1] > array[j]){
+                    int temp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+
+        LinkedList<Integer> listFromMaxToMin = new LinkedList<>();
+
+        for (int j : array) {
+            listFromMaxToMin.insertAtTheEnd(j);
+        }
+
+        System.out.println("List after bubble sort from max to min: ");
+        list.printlist(listFromMaxToMin.head);
+
     }
 
     public void insertAtTheBeginning(int newData)
@@ -135,4 +182,6 @@ public class LinkedList<T extends Number> {
             head = nextNode;
     }
 
-}
+    }
+
+
