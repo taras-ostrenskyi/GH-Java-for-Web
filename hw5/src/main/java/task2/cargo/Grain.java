@@ -2,10 +2,10 @@ package task2.cargo;
 
 public class Grain extends Carriage{
 
-    String unit = "tons";
-    int ton;
+    public String unit = "tons";
+    public int unitNumber;
 
-    public Grain(int ton){
-        this.ton = ton;
+    public Grain(int unitNumber){
+        this.unitNumber = unitNumber;
     }
 }

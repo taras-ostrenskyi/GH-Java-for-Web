@@ -2,10 +2,10 @@ package task2.cargo;
 
 public class Gasoline extends Carriage{
 
-    String unit = "gallons";
-    int gallon;
+    public String unit = "gallons";
+    public int unitNumber;
 
-    public Gasoline(int gallon){
-        this.gallon = gallon;
+    public Gasoline(int unitNumber){
+        this.unitNumber = unitNumber;
     }
 }

@@ -3,9 +3,9 @@ package task2.cargo;
 public class Water extends Carriage{
 
     String unit = "liters";
-    int liter;
+    public int unitNumber;
 
-    public Water (int liter){
-        this.liter = liter;
+    public Water (int unitNumber){
+        this.unitNumber = unitNumber;
     }
 }

@@ -2,13 +2,13 @@ package task2.cargo;
 
 public class Cookies extends Carriage{
 
-    String unit = "packs";
+    public String unit = "packs";
 
-    String name;
-    int numberOfUnits;
+    public String name;
+    public int unitNumber;
 
-    public Cookies (String name, int numberOfUnits){
+    public Cookies (String name, int unitNumber){
         this.name = name;
-        this.numberOfUnits = numberOfUnits;
+        this.unitNumber = unitNumber;
     }
 }

@@ -2,11 +2,11 @@ package task2.cargo;
 
 public class Milk extends Carriage {
 
-    String unit = "liters";
+    public String unit = "liters";
 
-    int liter;
+    public int unitNumber;
 
-    public Milk(int liters) {
-        this.liter = liter;
+    public Milk(int unitNumber) {
+        this.unitNumber = unitNumber;
     }
 }

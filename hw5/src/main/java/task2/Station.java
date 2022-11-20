@@ -28,7 +28,9 @@ public class Station {
     }
 
     public Train nextTrain() {
-        return null;
+        Train trainFirst = trains.get(0);
+        trains.remove(0);
+        return trainFirst;
     }
 
     public List<CargoWagon<Carriage>> getCargoWagons(Train train) {
@@ -38,6 +40,14 @@ public class Station {
     public void process(List<CargoWagon<Carriage>> wagons, ProcessType processType) {
         switch (processType){
             case DOWNLOAD:
+                int wagonNumber = 1;
+                for (CargoWagon<Carriage> wagon : wagons) {
+                    System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.unitNumber + " " + wagon.entry.unit);
+                    wagonNumber++;
+                }
+
+
+
                 System.out.println("Added");
                 break;
             case UNLOAD:
