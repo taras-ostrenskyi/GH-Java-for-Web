@@ -10,12 +10,6 @@ import java.util.List;
 
 public class Station {
 
-    Train train;
-
-    public Station(Train train){
-        this.train = train;
-    }
-
     public Station(){
 
     }
@@ -40,23 +34,10 @@ public class Station {
     public void process(List<CargoWagon<Carriage>> wagons, ProcessType processType) {
         switch (processType){
             case DOWNLOAD:
-                int wagonNumber = 1;
-                for (CargoWagon<Carriage> wagon : wagons) {
-                    if (wagon.entry.unitNumber == 0){
-                        System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " ↓");
-                    }
-                    else{
-                        System.out.print("/" + wagonNumber + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.name + wagon.entry.unitNumber + " " + wagon.entry.unit + " ↓");
-                    }
-                    wagonNumber++;
-                }
+                new InfoOutput(wagons).infoWagonDownload();
                 break;
             case UNLOAD:
-                int wagonNum = 1;
-                for (CargoWagon<Carriage> wagon : wagons) {
-                    System.out.print("/" + wagonNum + " " + wagon.entry.getClass().getSimpleName() + " " + wagon.entry.name + wagon.entry.unitNumber + " " + wagon.entry.unit + " ↑");
-                    wagonNum++;
-                }
+                new InfoOutput(wagons).infoWagonUnload();
                 break;
             default:
 
