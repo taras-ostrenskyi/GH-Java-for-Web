@@ -1,10 +1,9 @@
-package Imperative;
+package StreamAPI;
 
 import java.util.List;
 import java.util.Map;
 
 public class InfoOutput {
-
     List<Task> tasks;
     Map<String, List<Task>> categoriesMap;
     boolean hasCategoryAnyTasks;
@@ -30,7 +29,6 @@ public class InfoOutput {
     public InfoOutput(String titlesOfTasks){
         this.titlesOfTasks = titlesOfTasks;
     }
-
     public InfoOutput(Task task){this.task = task;}
 
     public void printTaskList() {
@@ -43,9 +41,8 @@ public class InfoOutput {
 
     public void printStringList(List<String> stringList){
         System.out.println("        List of all unique categories from all tasks:");
-        for (String s : stringList) {
-            System.out.println(s);
-        }
+        stringList
+                .forEach(System.out::println);
         System.out.println();
     }
 

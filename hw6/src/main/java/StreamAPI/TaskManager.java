@@ -1,10 +1,13 @@
-package Imperative;
+package StreamAPI;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TaskManager {
-
     List<Task> tasks;
     String category;
     int startNo;
@@ -30,12 +33,7 @@ public class TaskManager {
     }
 
     public List<Task> find5NearestImportantTasks(){
-        tasks.sort(new Comparator<>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getStartsOn().compareTo(o2.getStartsOn());
-            }
-        });
+        tasks.sort((o1, o2) -> o1.getStartsOn().compareTo(o2.getStartsOn()));
 
         List<Task> fiveNearestImportantTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -51,14 +49,10 @@ public class TaskManager {
     }
 
     public List<String> getUniqueCategories(){
-        List<String> categories = new ArrayList<>();
-        for (Task task : tasks) {
-            categories.add(task.getCategories());
-        }
 
-        Set<String> uniqueCategoriesSet = new HashSet<>(categories);
+        return tasks.stream()
+                .map(Task::getCategories).distinct().collect(Collectors.toList());
 
-        return new ArrayList<>(uniqueCategoriesSet);
     }
 
     public Map<String, List<Task>> getCategoriesWithTasks(){
@@ -111,15 +105,11 @@ public class TaskManager {
     }
 
     Map<String, Long> getCountsByCategories(List<Task> tasks){
-        List<String> categories = new ArrayList<>();
-        for (Task task : tasks) {
-            categories.add(task.getCategories());
-        }
-        Set<String> uniqueCategoriesSet = new HashSet<>(categories);
-        List<String> uniqueCategoriesList = new ArrayList<>(uniqueCategoriesSet);
+
+        List<String> uniqueCategoriesList = tasks.stream()
+                .map(Task::getCategories).distinct().collect(Collectors.toList());
 
         Map<String, Long> countsByCategories = new HashMap<>();
-
         long count;
         for (String s : uniqueCategoriesList) {
             count = 0;
@@ -150,4 +140,4 @@ public class TaskManager {
         return taskWithBiggestCountOfCategories;
     }
 
-    }
+}

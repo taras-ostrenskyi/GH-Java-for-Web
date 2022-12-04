@@ -1,4 +1,4 @@
-package Imperative;
+package StreamAPI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
