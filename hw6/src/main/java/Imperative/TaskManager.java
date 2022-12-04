@@ -108,4 +108,33 @@ public class TaskManager {
         return String.join(",", titlesOfTasks);
     }
 
+    Map<String, Long> getCountsByCategories(List<Task> tasks){
+        List<String> categories = new ArrayList<>();
+        for (Task task : tasks) {
+            categories.add(task.getCategories());
+        }
+        Set<String> uniqueCategoriesSet = new HashSet<>(categories);
+        List<String> uniqueCategoriesList = new ArrayList<>(uniqueCategoriesSet);
+
+        Map<String, Long> countsByCategories = new HashMap<>();
+
+        long count = 0;
+        for (String s : uniqueCategoriesList) {
+            for (Task task : tasks) {
+                if (task.getCategories() == s) {
+                    count++;
+                }
+            }
+            countsByCategories.put(s, count);
+        }
+        return countsByCategories;
+    }
+
+    Task findTaskWithBiggestCountOfCategories(List<Task> tasks){
+        Task taskWithBiggestCountOfCategories = null;
+
+
+        return taskWithBiggestCountOfCategories;
+    }
+
     }

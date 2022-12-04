@@ -33,6 +33,8 @@ public class Main {
 
         new InfoOutput(new TaskManager(tasks, 2, 4).getTitlesOfTasks()).printTitlesOfTasks();
 
+        new InfoOutput().printCountsByCategories(new TaskManager().getCountsByCategories(tasks));
+
     }
 
 

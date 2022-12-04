@@ -82,4 +82,12 @@ public class InfoOutput {
         System.out.println(titlesOfTasks);
         System.out.println();
     }
+
+    public void printCountsByCategories(Map<String, Long> countsByCategories){
+        System.out.println("        Сount of tasks in each category:");
+        for (String keys : countsByCategories.keySet()){
+            System.out.println(keys + ": " + countsByCategories.get(keys));
+        }
+        System.out.println();
+    }
 }
