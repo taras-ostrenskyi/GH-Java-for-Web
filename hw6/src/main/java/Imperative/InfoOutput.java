@@ -51,7 +51,9 @@ public class InfoOutput {
         for (String keys : categoriesMap.keySet())
         {
             System.out.println(keys + ":");
-            System.out.println(categoriesMap.get(keys));
+            for (Task task : categoriesMap.get(keys)) {
+                System.out.println("id:" + task.getId() + " type:" + task.getType() + " title:" + task.getTitle() + " done:" + task.getDone() + " category:" + task.getCategories() + " startsOn:" + task.getStartsOn());
+            }
         }
         System.out.println();
     }
@@ -61,7 +63,11 @@ public class InfoOutput {
         for (Boolean keys : booleanMap.keySet())
         {
             System.out.println(keys + ":");
-            System.out.println(booleanMap.get(keys));
+            for (Task task : booleanMap.get(keys)) {
+                if (task.getDone()) {
+                    System.out.println("id:" + task.getId() + " type:" + task.getType() + " title:" + task.getTitle() + " done:" + task.getDone() + " category:" + task.getCategories() + " startsOn:" + task.getStartsOn());
+                }
+            }
         }
         System.out.println();
     }
@@ -72,7 +78,7 @@ public class InfoOutput {
             System.out.println("There are tasks in this category");
         }
         else{
-            System.out.println("There are no tasks in this category");
+            System.out.println("There are NO tasks in this category");
         }
         System.out.println();
     }

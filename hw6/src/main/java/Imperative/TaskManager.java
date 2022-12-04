@@ -73,7 +73,10 @@ public class TaskManager {
     public Map<Boolean, List<Task>> splitTasksIntoDoneAndInProgress(){
         Map<Boolean, List<Task>> tasksDoneAndInProgress = new HashMap<>();
         for (int i = 0; i < tasks.size(); i++){
-            tasksDoneAndInProgress.put(tasks.get(i).getDone(), tasks);
+            if (tasks.get(i).getDone()) {
+                tasksDoneAndInProgress.put(tasks.get(i).getDone(), tasks);
+            }
+            else tasksDoneAndInProgress.put(tasks.get(i).getDone(), tasks);
         }
         return tasksDoneAndInProgress;
     }
@@ -81,8 +84,7 @@ public class TaskManager {
     public boolean existsTaskOfCategory(){
         boolean hasCategoryAnyTasks = false;
         for (Task task : tasks) {
-            //System.out.println(task.getCategories());
-            if (task.getCategories() == category)/*&& task.getTitle() != null && !task.getDone()*/ {
+            if (task.getCategories().contains(category) && task.getTitle() != null && !task.getDone()) {
                 hasCategoryAnyTasks = true;
                 break;
             }
@@ -120,8 +122,9 @@ public class TaskManager {
 
         long count = 0;
         for (String s : uniqueCategoriesList) {
+            count = 0;
             for (Task task : tasks) {
-                if (task.getCategories() == s) {
+                if (task.getCategories().contains(s)) {
                     count++;
                 }
             }
