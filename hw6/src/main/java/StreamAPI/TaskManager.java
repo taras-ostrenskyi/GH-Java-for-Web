@@ -73,6 +73,9 @@ public class TaskManager {
             else tasksDoneAndInProgress.put(tasks.get(i).getDone(), tasks);
         }
         return tasksDoneAndInProgress;
+
+        /*return tasks.stream()
+                .collect(Collectors.toMap(Task::getDone, List<Task>);*/
     }
 
     public boolean existsTaskOfCategory(){
