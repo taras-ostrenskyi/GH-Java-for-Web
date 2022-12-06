@@ -1,5 +1,6 @@
 package StreamAPI;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ public class InfoOutput {
     Map<String, List<Task>> categoriesMap;
     boolean hasCategoryAnyTasks;
     String titlesOfTasks;
+    IntSummaryStatistics intSummaryStatistics;
     Task task;
 
     public InfoOutput(List<Task> tasks){
@@ -28,6 +30,9 @@ public class InfoOutput {
 
     public InfoOutput(String titlesOfTasks){
         this.titlesOfTasks = titlesOfTasks;
+    }
+    public InfoOutput(IntSummaryStatistics intSummaryStatistics){
+        this.intSummaryStatistics = intSummaryStatistics;
     }
     public InfoOutput(Task task){this.task = task;}
 
@@ -96,6 +101,12 @@ public class InfoOutput {
         for (String keys : countsByCategories.keySet()){
             System.out.println(keys + ": " + countsByCategories.get(keys));
         }
+        System.out.println();
+    }
+
+    public void printCategoriesNamesLengthStatistics(){
+        System.out.println("        Different statistics about length of categories names:");
+        System.out.println(intSummaryStatistics);
         System.out.println();
     }
 

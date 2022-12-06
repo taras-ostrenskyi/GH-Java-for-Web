@@ -134,20 +134,15 @@ public class TaskManager {
     }
 
     Task findTaskWithBiggestCountOfCategories(){
-        int categoryMax = tasks.stream()
-                .mapToInt(value -> value.getCategories().length())
-                .summaryStatistics()
-                .getMax();
-
-        Task taskWithBiggestCountOfCategories = null;
-        for (Task task : tasks) {
-            if (task.getCategories().length() == categoryMax) {
-                taskWithBiggestCountOfCategories = task;
-                break;
+        int categoryMax = tasks.get(0).getCategories().length();
+        int indexCategoryMax = 0;
+        for (int i = 1; i < tasks.size(); i++){
+            if (tasks.get(i).getCategories().length() > categoryMax){
+                categoryMax = tasks.get(i).getCategories().length();
+                indexCategoryMax = i;
             }
         }
-
-        return taskWithBiggestCountOfCategories;
+        return tasks.get(indexCategoryMax);
     }
 
     }

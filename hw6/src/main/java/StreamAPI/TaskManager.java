@@ -1,10 +1,7 @@
 package StreamAPI;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaskManager {
@@ -35,24 +32,15 @@ public class TaskManager {
     public List<Task> find5NearestImportantTasks(){
         tasks.sort((o1, o2) -> o1.getStartsOn().compareTo(o2.getStartsOn()));
 
-        List<Task> fiveNearestImportantTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if ((task.getStartsOn().isEqual(LocalDate.now()) || task.getStartsOn().isAfter(LocalDate.now())) && task.getType() == TaskType.IMPORTANT && !task.getDone()) {
-                fiveNearestImportantTasks.add(task);
-            }
-            if (fiveNearestImportantTasks.size() == 5) {
-                break;
-            }
-        }
-
-        return fiveNearestImportantTasks;
+        return tasks.stream()
+                .filter(t -> t.getStartsOn().isEqual(LocalDate.now()) || (t.getStartsOn().isAfter(LocalDate.now()) && t.getType() == TaskType.IMPORTANT && !t.getDone()))
+                .limit(5)
+                .collect(Collectors.toList());
     }
 
     public List<String> getUniqueCategories(){
-
         return tasks.stream()
                 .map(Task::getCategories).distinct().collect(Collectors.toList());
-
     }
 
     public Map<String, List<Task>> getCategoriesWithTasks(){
@@ -65,6 +53,7 @@ public class TaskManager {
     }
 
     public Map<Boolean, List<Task>> splitTasksIntoDoneAndInProgress(){
+
         Map<Boolean, List<Task>> tasksDoneAndInProgress = new HashMap<>();
         for (int i = 0; i < tasks.size(); i++){
             if (tasks.get(i).getDone()) {
@@ -74,8 +63,10 @@ public class TaskManager {
         }
         return tasksDoneAndInProgress;
 
-        /*return tasks.stream()
-                .collect(Collectors.toMap(Task::getDone, List<Task>);*/
+        /*return (Map<Boolean, List<Task>>) tasks.stream()
+                .filter(p -> p.getDone())
+                .map(p -> p.getDone())
+                .collect(Collectors.toList());*/
     }
 
     public boolean existsTaskOfCategory(){
@@ -124,6 +115,11 @@ public class TaskManager {
             countsByCategories.put(s, count);
         }
         return countsByCategories;
+    }
+
+    IntSummaryStatistics getCategoriesNamesLengthStatistics(){
+        return tasks.stream()
+                .collect(Collectors.summarizingInt(t -> t.getCategories().length()));
     }
 
     Task findTaskWithBiggestCountOfCategories(){

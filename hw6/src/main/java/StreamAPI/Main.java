@@ -34,6 +34,8 @@ public class Main {
 
         new InfoOutput().printCountsByCategories(new TaskManager().getCountsByCategories(tasks));
 
+        new InfoOutput(new TaskManager(tasks).getCategoriesNamesLengthStatistics()).printCategoriesNamesLengthStatistics();
+
         new InfoOutput(new TaskManager(tasks).findTaskWithBiggestCountOfCategories()).printTask();
 
     }
