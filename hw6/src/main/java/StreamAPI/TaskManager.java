@@ -71,17 +71,18 @@ public class TaskManager {
 
     public boolean existsTaskOfCategory(){
         boolean hasCategoryAnyTasks = false;
-        for (Task task : tasks) {
-            if (task.getCategories().contains(category) && task.getTitle() != null && !task.getDone()) {
-                hasCategoryAnyTasks = true;
-                break;
-            }
-        }
+        hasCategoryAnyTasks = tasks.stream()
+                .anyMatch(t -> t.getCategories().contains(category) && t.getTitle() != null && !t.getDone());
         return hasCategoryAnyTasks;
     }
 
     String getTitlesOfTasks(){
         List<String> titlesOfTasks = new ArrayList<>();
+
+        /*titlesOfTasks = tasks.stream()
+                .map(Task::getTitle)
+                .filter( startNo >= tasks.indexOf(tasks.get(0)) + 1 && endNo <= (tasks.indexOf(tasks.get(tasks.size() - 1)) + 1))*/
+
         if (startNo >= tasks.indexOf(tasks.get(0)) + 1 && endNo <= (tasks.indexOf(tasks.get(tasks.size() - 1)) + 1)){
             for (int i = startNo - 1; i < endNo; i++){
                 titlesOfTasks.add(tasks.get(i).getTitle());
