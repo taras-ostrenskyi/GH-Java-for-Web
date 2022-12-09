@@ -15,7 +15,6 @@ public class StreamLikeOps {
     public static <E> List<E> generate(Supplier<E> generator,
                                        Supplier<List<E>> listFactory,
                                        int count) {
-
         List<E> foodList = listFactory.get();
         for (int i = 0; i < count; i++){
             foodList.add(generator.get());
@@ -25,23 +24,45 @@ public class StreamLikeOps {
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
-        //TODO Implement me
-        return null;
+        List<E> filterFoodList = new ArrayList<>();
+        for (E element : elements) {
+            if (filter.test(element)) {
+                filterFoodList.add(element);
+            }
+        }
+
+        return filterFoodList;
     }
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
-        //TODO Implement me
+        for (E element : elements) {
+            if (predicate.test(element)) {
+                return true;
+            }
+        }
         return false;
     }
 
     public static <E> boolean allMatch(List<E> elements, Predicate<E> predicate) {
-        //TODO Implement me
-        return false;
+        boolean allMatch = true;
+        for (E element : elements) {
+            if (!predicate.test(element)) {
+                allMatch = false;
+                break;
+            }
+        }
+
+        return allMatch;
     }
 
     public static <E> boolean noneMatch(List<E> elements, Predicate<E> predicate) {
-        //TODO Implement me
-        return false;
+        for (E element : elements) {
+            if (predicate.test(element)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     public static <T, R> List<R> map(List<T> elements,
@@ -129,7 +150,49 @@ public class StreamLikeOps {
         Supplier<Food> generator = () -> food;
         Supplier<List<Food>> listFactory = ArrayList::new;
         int count = 5;
-        new InfoOutput(generate(generator, listFactory, count)).printFoodList();
+        List<Food> foodList = generate(generator, listFactory, count);
+        new InfoOutput(foodList).printFoodList();
+
+        Food food1 = new Food("Vegetables", "Tomato");
+        Food food2 = new Food("Vegetables", "Potato");
+        Food food3 = new Food("Vegetables", "Carrot");
+        Food food4 = new Food("Bread", "White bread");
+        Food food5 = new Food("Bread", "Brown bread");
+        foodList.add(food1);
+        foodList.add(food2);
+        foodList.add(food3);
+        foodList.add(food4);
+        foodList.add(food5);
+        Predicate<Food> filter = f -> f.getFoodType().equalsIgnoreCase("vegetables");
+        List<Food> filterFoodList1 = filter(foodList,filter);
+        new InfoOutput(filterFoodList1).printFilterFoodList();
+
+        Predicate<Food> predicateAnyMatch1 = p -> p.getTitle().toLowerCase().contains("bread");
+        boolean anyMatch1 = anyMatch(foodList,predicateAnyMatch1);
+        new InfoOutput(anyMatch1).printAnyMatchBoolean();
+
+        Predicate<Food> predicateAnyMatch2 = p -> p.getTitle().contains("vine");
+        boolean anyMatch2 = anyMatch(foodList,predicateAnyMatch2);
+        new InfoOutput(anyMatch2).printAnyMatchBoolean();
+
+        Predicate<Food> predicateAllMatch1 = p -> p.getTitle().toLowerCase().contains("a");
+        boolean allMatch1 = allMatch(foodList,predicateAllMatch1);
+        new InfoOutput(allMatch1).printAllMatchBoolean();
+
+        Predicate<Food> predicateAllMatch2 = p -> p.getTitle().toLowerCase().contains("apple");
+        boolean allMatch2 = allMatch(foodList,predicateAllMatch2);
+        new InfoOutput(allMatch2).printAllMatchBoolean();
+
+        Predicate<Food> predicateNoneMatch1 = p -> p.getTitle().toLowerCase().contains("water");
+        boolean noneMatch1 = noneMatch(foodList,predicateNoneMatch1);
+        new InfoOutput(noneMatch1).printNoneMatchBoolean();
+
+        Predicate<Food> predicateNoneMatch2 = p -> p.getTitle().toLowerCase().contains("carrot");
+        boolean noneMatch2 = noneMatch(foodList,predicateNoneMatch2);
+        new InfoOutput(noneMatch2).printNoneMatchBoolean();
+        
+
+
 
     }
 
