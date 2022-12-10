@@ -68,18 +68,22 @@ public class StreamLikeOps {
     public static <T, R> List<R> map(List<T> elements,
                                      Function<T, R> mappingFunction,
                                      Supplier<List<R>> listFactory) {
-        //TODO Implement me
-        return null;
+        List<R> foodList = listFactory.get();
+        for (T element : elements) {
+            foodList.add(mappingFunction.apply(element));
+        }
+
+        return foodList;
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
-        return null;
+        elements.sort(comparator);
+        return Optional.of(elements.get(0));
     }
 
     public static <E> Optional<E> min(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
-        return null;
+        elements.sort(comparator);
+        return Optional.of(elements.get(0));
     }
 
     public static <E> List<E> distinct(List<E> elements, Supplier<List<E>> listFactory) {
@@ -163,9 +167,14 @@ public class StreamLikeOps {
         foodList.add(food3);
         foodList.add(food4);
         foodList.add(food5);
-        Predicate<Food> filter = f -> f.getFoodType().equalsIgnoreCase("vegetables");
-        List<Food> filterFoodList1 = filter(foodList,filter);
+
+        Predicate<Food> filter1 = f -> f.getFoodType().equalsIgnoreCase("vegetables");
+        List<Food> filterFoodList1 = filter(foodList, filter1);
         new InfoOutput(filterFoodList1).printFilterFoodList();
+
+        Predicate<Food> filter2 = f -> f.getFoodType().equalsIgnoreCase("fruits");
+        List<Food> filterFoodList2 = filter(foodList, filter2);
+        new InfoOutput(filterFoodList2).printFilterFoodList();
 
         Predicate<Food> predicateAnyMatch1 = p -> p.getTitle().toLowerCase().contains("bread");
         boolean anyMatch1 = anyMatch(foodList,predicateAnyMatch1);
@@ -190,10 +199,32 @@ public class StreamLikeOps {
         Predicate<Food> predicateNoneMatch2 = p -> p.getTitle().toLowerCase().contains("carrot");
         boolean noneMatch2 = noneMatch(foodList,predicateNoneMatch2);
         new InfoOutput(noneMatch2).printNoneMatchBoolean();
-        
+
+        Function<Food, Food> mappingFunction1 = f -> {
+            return new Food(f.getFoodType(), f.getTitle().toUpperCase());
+        };
+        List<Food> mapList1 = map(foodList, mappingFunction1, listFactory);
+        new InfoOutput(mapList1).printMapList();
+
+        Function<Food, Food> mappingFunction2 = f -> {
+            return new Food(f.getFoodType(), f.getTitle().toLowerCase());
+        };
+        List<Food> mapList2 = map(mapList1, mappingFunction2, listFactory);
+        new InfoOutput(mapList2).printMapList();
+
+        Comparator<Food> byTitleLength = (Food f1, Food f2) -> Integer.compare(f2.getTitle().length(), f1.getTitle().length());
+        Optional<Food> optionalMax = max(foodList, byTitleLength);
+        new InfoOutput(optionalMax).printFoodOptional();
+
+        Comparator<Food> byFoodType = Comparator.comparingInt(f -> f.getTitle().length());
+        Optional<Food> optionalMin = min(foodList, byFoodType);
+        new InfoOutput(optionalMin).printFoodOptional();
 
 
 
-    }
+        }
+
+
+
 
 }
