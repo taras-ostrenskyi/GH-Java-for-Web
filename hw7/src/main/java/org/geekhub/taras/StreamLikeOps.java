@@ -15,23 +15,21 @@ public class StreamLikeOps {
     public static <E> List<E> generate(Supplier<E> generator,
                                        Supplier<List<E>> listFactory,
                                        int count) {
-        List<E> foodList = listFactory.get();
+        List<E> eList = listFactory.get();
         for (int i = 0; i < count; i++){
-            foodList.add(generator.get());
+            eList.add(generator.get());
         }
-
-        return foodList;
+        return eList;
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
-        List<E> filterFoodList = new ArrayList<>();
+        List<E> filterElist = new ArrayList<>();
         for (E element : elements) {
             if (filter.test(element)) {
-                filterFoodList.add(element);
+                filterElist.add(element);
             }
         }
-
-        return filterFoodList;
+        return filterElist;
     }
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
@@ -51,7 +49,6 @@ public class StreamLikeOps {
                 break;
             }
         }
-
         return allMatch;
     }
 
@@ -61,19 +58,17 @@ public class StreamLikeOps {
                 return false;
             }
         }
-        
         return true;
     }
 
     public static <T, R> List<R> map(List<T> elements,
                                      Function<T, R> mappingFunction,
                                      Supplier<List<R>> listFactory) {
-        List<R> foodList = listFactory.get();
+        List<R> rList = listFactory.get();
         for (T element : elements) {
-            foodList.add(mappingFunction.apply(element));
+            rList.add(mappingFunction.apply(element));
         }
-
-        return foodList;
+        return rList;
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
@@ -87,30 +82,61 @@ public class StreamLikeOps {
     }
 
     public static <E> List<E> distinct(List<E> elements, Supplier<List<E>> listFactory) {
-        //TODO Implement me
-        return null;
+        List<E> distinctElist = listFactory.get();
+        for (int i = 1; i < elements.size(); i++){
+            if (!distinctElist.contains(elements.get(i))){
+                distinctElist.add(elements.get(i));
+            }
+        }
+        return distinctElist;
     }
 
     public static <E> void forEach(List<E> elements, Consumer<E> consumer) {
-        //TODO Implement me
+        for (E element : elements) {
+            consumer.accept(element);
+        }
+        System.out.println();
     }
 
     public static <E> Optional<E> reduce(List<E> elements, BinaryOperator<E> accumulator) {
-        //TODO Implement me
-        return null;
+        E e = null;
+        for (E element : elements) {
+            if (e == null) {
+                e = element;
+            } else {
+                e = accumulator.apply(e, element);
+            }
+        }
+        return Optional.of(e);
     }
 
     public static <E> E reduce(E seed, List<E> elements, BinaryOperator<E> accumulator) {
-        //TODO Implement me
-        return null;
+        E e = seed;
+        for (E element : elements) {
+            e = accumulator.apply(e, element);
+        }
+        return e;
     }
 
     public static <E> Map<Boolean, List<E>> partitionBy(List<E> elements,
                                                         Predicate<E> predicate,
                                                         Supplier<Map<Boolean, List<E>>> mapFactory,
                                                         Supplier<List<E>> listFactory) {
-        //TODO Implement me
-        return null;
+        Map<Boolean, List<E>> booleanListMap = mapFactory.get();
+        List<E> trueList = listFactory.get();
+        List<E> falseList = listFactory.get();
+
+        for (E element : elements) {
+            if (predicate.test(element)) {
+                trueList.add(element);
+            } else {
+                falseList.add(element);
+            }
+        }
+
+        booleanListMap.put(true, trueList);
+        booleanListMap.put(false, falseList);
+        return booleanListMap;
     }
 
     public static <T, K> Map<K, List<T>> groupBy(List<T> elements,
@@ -200,31 +226,50 @@ public class StreamLikeOps {
         boolean noneMatch2 = noneMatch(foodList,predicateNoneMatch2);
         new InfoOutput(noneMatch2).printNoneMatchBoolean();
 
-        Function<Food, Food> mappingFunction1 = f -> {
-            return new Food(f.getFoodType(), f.getTitle().toUpperCase());
-        };
+        Function<Food, Food> mappingFunction1 = f -> new Food(f.getFoodType(), f.getTitle().toUpperCase());
         List<Food> mapList1 = map(foodList, mappingFunction1, listFactory);
         new InfoOutput(mapList1).printMapList();
 
-        Function<Food, Food> mappingFunction2 = f -> {
-            return new Food(f.getFoodType(), f.getTitle().toLowerCase());
-        };
+        Function<Food, Food> mappingFunction2 = f -> new Food(f.getFoodType(), f.getTitle().toLowerCase());
         List<Food> mapList2 = map(mapList1, mappingFunction2, listFactory);
         new InfoOutput(mapList2).printMapList();
 
         Comparator<Food> byTitleLength = (Food f1, Food f2) -> Integer.compare(f2.getTitle().length(), f1.getTitle().length());
         Optional<Food> optionalMax = max(foodList, byTitleLength);
-        new InfoOutput(optionalMax).printFoodOptional();
+        new InfoOutput(optionalMax).printOptionalMax();
 
         Comparator<Food> byFoodType = Comparator.comparingInt(f -> f.getTitle().length());
         Optional<Food> optionalMin = min(foodList, byFoodType);
-        new InfoOutput(optionalMin).printFoodOptional();
+        new InfoOutput(optionalMin).printOptionalMin();
+
+        List<Food> distinctFoodList = distinct(foodList, listFactory);
+        new InfoOutput(distinctFoodList).printDistinctFoodList();
+
+        Consumer<Food> consumer = f -> new InfoOutput(f).printFood();
+        System.out.println("                Usage example   public static <E> void forEach");
+        forEach(distinctFoodList, consumer);
+
+        Comparator<Food> comparing = Comparator.comparing(Food::getFoodType);
+        BinaryOperator<Food> accumulator1 = BinaryOperator.minBy(comparing);
+        Optional<Food> optionalReduse1 = reduce(foodList, accumulator1);
+        new InfoOutput(optionalReduse1).printOptionalReduce();
+
+        BinaryOperator<Food> accumulator2 = BinaryOperator.maxBy(comparing);
+        Optional<Food> optionalReduse2 = reduce(foodList, accumulator2);
+        new InfoOutput(optionalReduse2).printOptionalReduce();
+
+        Food foodReduce1 = reduce(food1, foodList, accumulator1);
+        new InfoOutput(foodReduce1).printfoodReduce();
+
+        Food foodReduce2 = reduce(food1, foodList, accumulator2);
+        new InfoOutput(foodReduce2).printfoodReduce();
+
+        Predicate<Food> predicateFoodType = f -> f.getFoodType().equalsIgnoreCase("bread");
+        Supplier<Map<Boolean, List<Food>>> mapFactory = HashMap::new;
+        Map<Boolean, List<Food>> booleanListMap = partitionBy(foodList, predicateFoodType, mapFactory, listFactory);
+        new InfoOutput(booleanListMap).printBooleanMap();
 
 
-
-        }
-
-
-
+    }
 
 }
