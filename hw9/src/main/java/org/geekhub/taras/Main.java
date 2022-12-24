@@ -1,10 +1,8 @@
 package org.geekhub.taras;
 
-import classes.to.test.hw9.Car;
-import classes.to.test.hw9.Cat;
-import classes.to.test.hw9.Human;
-
-import javax.swing.text.html.parser.Entity;
+import to.test.hw9.Car;
+import to.test.hw9.Cat;
+import to.test.hw9.Human;
 
 public class Main {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
