@@ -1,31 +1,30 @@
 package org.geekhub.taras;
 
-import classes.to.test.hw9.Car;
-import classes.to.test.hw9.Cat;
-import classes.to.test.hw9.Human;
-
 import java.lang.reflect.Field;
 
 public class BeanRepresenter {
-    public static void main(String[] args) {
-        Cat cat = new Cat("Black", 3, 4, 35);
-        Car car = new Car("black", 190, "Sedan", "RX-7");
-        Human human = new Human(180, "male", 22, 75);
+    Object object;
 
-        Class<? extends Cat> catClass = cat.getClass();
-        Field[] catFields = catClass.getDeclaredFields();
-        new Printer(catClass, catFields, cat).printView();
-
-        Class<? extends Car> carClass = car.getClass();
-        Field[] carFields = carClass.getDeclaredFields();
-        new Printer(carClass, carFields, car).printView();
-
-        Class<? extends Human> humanClass = human.getClass();
-        Field[] humanFields = humanClass.getDeclaredFields();
-        new Printer(humanClass, humanFields, human).printView();
-
-        System.out.println();
-
+    public BeanRepresenter(Object object){
+        this.object = object;
     }
 
+    public void printView() {
+        Class<?> clazz = object.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+
+        System.out.println();
+        System.out.println(" " + clazz.getSimpleName());
+        for (Field field : fields) {
+            System.out.print(field.getName() + "                ");
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(object);
+            } catch (IllegalAccessException e) {
+                System.err.println("Caught RuntimeException: " + e.getMessage());
+            }
+            System.out.println(value);
+        }
+    }
 }
