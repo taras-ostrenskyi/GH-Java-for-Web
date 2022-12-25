@@ -16,7 +16,7 @@ public class BeanRepresenter {
         System.out.println();
         System.out.println(" " + clazz.getSimpleName());
         for (Field field : fields) {
-            System.out.print(field.getName() + "                ");
+            System.out.print(field.getName() + "  |  ");
             field.setAccessible(true);
             Object value = null;
             try {

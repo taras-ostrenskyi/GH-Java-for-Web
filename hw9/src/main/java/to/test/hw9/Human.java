@@ -13,5 +13,7 @@ public class Human {
         this.weight = weight;
     }
 
+    public Human(){
 
+    }
 }

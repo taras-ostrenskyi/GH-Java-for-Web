@@ -13,5 +13,7 @@ public class Cat {
         this.fullLength = fullLength;
     }
 
+    public Cat(){
 
+    }
 }
