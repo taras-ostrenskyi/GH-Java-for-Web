@@ -17,6 +17,7 @@ public class Main {
         new Thread(new ImagesDownloader(sourceUrl4, destinationFolder, numberOfFiles)).start();
         new Thread(new ImagesDownloader(sourceUrl5, destinationFolder, numberOfFiles)).start();
 
-        System.out.println("Hello world!");
+        Thread thread = new FileOrganizer(destinationFolder);
+        thread.start();
     }
 }
