@@ -42,3 +42,31 @@ SELECT sort.* FROM (
 ORDER BY countOfCities DESC, sort.name, sort.id;
 
 /*5*/
+SELECT countries.id, countries.sortname, countries.name, countries.phonecode,
+       COUNT(DISTINCT s.id) AS countOfStates,
+       COUNT(c.id) AS countOfCities
+FROM countries
+         LEFT JOIN states s ON countries.id = s.country_id
+         LEFT JOIN cities c ON c.state_id = s.id
+GROUP BY countries.id, countries.name;
+
+/*8*/
+SELECT countries.id, countries.sortname, countries.name, countries.phonecode, AVG(s.id)
+FROM countries
+         JOIN states s ON countries.id = s.country_id
+WHERE s.id > (SELECT AVG(states.id) FROM states)
+GROUP BY countries.id, countries.sortname, countries.name, countries.phonecode;
+
+/*10*/
+SELECT states.name,
+       COUNT(states.name)
+FROM states
+GROUP BY states.name
+HAVING COUNT(states.name) > 1;
+
+/*11*/
+SELECT states.id, states.name, states.country_id
+FROM states
+         LEFT JOIN cities c ON states.id = c.state_id
+GROUP BY states.id
+HAVING COUNT(c.id) = 0;
