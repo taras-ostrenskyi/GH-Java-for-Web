@@ -50,12 +50,48 @@ FROM countries
          LEFT JOIN cities c ON c.state_id = s.id
 GROUP BY countries.id, countries.name;
 
+/*6*/
+SELECT con.*, COUNT(c.id) as CountOfCitiesInState
+FROM countries con
+         LEFT JOIN states s ON s.country_id = con.id
+         LEFT JOIN cities c ON c.state_id = s.id
+GROUP BY s.id, con.id
+ORDER BY CountOfCitiesInState DESC
+LIMIT 10;
+
+/*7*/
+SELECT * FROM
+    (SELECT con.*, COUNT(s.id) as CountOfStates
+     FROM countries con
+              LEFT JOIN states s ON s.country_id = con.id
+     GROUP BY con.id
+     ORDER BY CountOfStates DESC
+     LIMIT 10) AS max
+UNION ALL
+(SELECT con.*, COUNT(s.id) as CountOfStates
+ FROM countries con
+          LEFT JOIN states s ON s.country_id = con.id
+ GROUP BY con.id
+ ORDER BY CountOfStates
+ LIMIT 10)
+ORDER BY name;
+
 /*8*/
 SELECT countries.id, countries.sortname, countries.name, countries.phonecode, AVG(s.id)
 FROM countries
          JOIN states s ON countries.id = s.country_id
 WHERE s.id > (SELECT AVG(states.id) FROM states)
 GROUP BY countries.id, countries.sortname, countries.name, countries.phonecode;
+
+/*9*/
+SELECT id, sortname, name, phonecode, CountOfStates FROM
+    (SELECT *, RANK () OVER (PARTITION BY CountOfStates ORDER BY name) num
+     FROM
+         (SELECT con.*, COUNT(s.id) AS CountOfStates
+          FROM countries con
+                   LEFT JOIN states s ON s.country_id = con.id
+          GROUP BY con.id) tab1) tab2
+WHERE num = 1;
 
 /*10*/
 SELECT states.name,
