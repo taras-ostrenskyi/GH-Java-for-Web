@@ -7,8 +7,7 @@ public class Environment {
     private final Properties properties;
 
     public Environment(String propertyFileName) {
-
-        this.properties = null;
+        this.properties = new Properties();
     }
 
     public String getProperty(String property) {

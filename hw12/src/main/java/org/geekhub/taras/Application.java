@@ -65,7 +65,7 @@ public class Application {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(env.getProperty("db.url"));
         config.setUsername(env.getProperty("db.username"));
-        config.setPassword("db.password");
+        config.setPassword(env.getProperty("db.password"));
 
         HikariDataSource ds;
         try {
