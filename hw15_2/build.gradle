@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.geekhub.taras'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    // https://mvnrepository.com/artifact/org.springframework/spring
+    implementation group: 'org.springframework', name: 'spring', version: '5.3.25', ext: 'pom'
+
+    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.25'
+    implementation group: 'org.springframework', name: 'spring-core', version: '5.3.25'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '5.3.25'
+}
+
+test {
+    useJUnitPlatform()
+}

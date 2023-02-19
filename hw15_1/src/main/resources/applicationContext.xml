@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="engine" class="org.geekhub.taras.Engine">
+        <property name="capacity" value="2500"/>
+    </bean>
+
+    <bean id="summerTyre" class="org.geekhub.taras.SummerTyre">
+        <property name="name" value="rosava"/>
+        <property name="size" value="13"/>
+    </bean>
+
+    <bean id="winterTyre" class="org.geekhub.taras.WinterTyre">
+        <constructor-arg index="0" value="aplus"/>
+        <constructor-arg index="1" value="16"/>
+    </bean>
+
+    <bean id="summerWheel" class="org.geekhub.taras.Wheel">
+    <constructor-arg ref="summerTyre"/>
+    </bean>
+
+    <bean id="winterWheel" class="org.geekhub.taras.Wheel">
+        <constructor-arg ref="winterTyre"/>
+    </bean>
+
+    <bean id="summerWheelList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="summerWheel"/>
+                <ref bean="summerWheel"/>
+                <ref bean="summerWheel"/>
+                <ref bean="summerWheel"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="winterWheelList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="winterWheel"/>
+                <ref bean="winterWheel"/>
+                <ref bean="winterWheel"/>
+                <ref bean="winterWheel"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="summerCar" class="org.geekhub.taras.Car">
+        <constructor-arg ref="engine"/>
+        <constructor-arg ref="summerWheelList"/>
+    </bean>
+
+    <bean id="winterCar" class="org.geekhub.taras.Car">
+        <constructor-arg ref="engine"/>
+        <constructor-arg ref="winterWheelList"/>
+    </bean>
+
+</beans>
